@@ -2,6 +2,7 @@
 import { signOut } from 'next-auth/react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
+import { APP_VERSION } from '@/lib/version';
 
 const TABS = [
   { href: '/admin', label: 'Přehled' },
@@ -19,8 +20,9 @@ export default function AdminNav() {
     <div className="bg-[#141414] border-b border-white/10 sticky top-0 z-10">
       <div className="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
         <div className="flex items-center gap-6">
-          <Link href="/" className="font-black text-white text-sm tracking-[0.15em] uppercase shrink-0">
-            Sky Legends
+          <Link href="/" className="flex items-baseline gap-2 shrink-0">
+            <span className="font-black text-white text-sm tracking-[0.15em] uppercase">Sky Legends</span>
+            <span className="text-[10px] text-white/25 font-mono tracking-normal normal-case">ver {APP_VERSION}</span>
           </Link>
           <span className="text-white/15">|</span>
           <nav className="flex items-center gap-1">

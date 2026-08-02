@@ -188,10 +188,13 @@ export default function CustomQuoteBuilder() {
             <input
               className={inputClass + ' max-w-[220px]'}
               type="number"
-              placeholder="Bez zadání se v PDF uvede „cena bude upřesněna“"
+              placeholder="Např. 15000"
               value={manualTotal}
               onChange={e => setManualTotal(e.target.value)}
             />
+            <p className="text-xs text-white/25 mt-1.5">
+              Bez zadání se v PDF uvede „cena bude upřesněna“.
+            </p>
           </div>
         )}
       </div>
