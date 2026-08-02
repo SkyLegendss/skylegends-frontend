@@ -12,6 +12,8 @@ module.exports = {
         sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
       },
       colors: {
+        ink: '#12151A',
+        accent: '#89D4E2',
         sky: {
           50:  '#f0f9ff',
           100: '#e0f2fe',

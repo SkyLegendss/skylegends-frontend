@@ -28,7 +28,7 @@ export default function AdminLogin() {
   const inputClass = "w-full px-4 py-3 bg-white/5 border border-white/10 text-white text-sm placeholder:text-white/20 focus:outline-none focus:border-white/40 transition-colors duration-200";
 
   return (
-    <div className="min-h-screen bg-black flex items-center justify-center px-6">
+    <div className="min-h-screen bg-ink flex items-center justify-center px-6">
       <div className="w-full max-w-sm">
         <div className="text-center mb-10">
           <Link href="/" className="font-black text-white text-base tracking-[0.15em] uppercase inline-block mb-3">
@@ -61,7 +61,7 @@ export default function AdminLogin() {
           )}
           <button
             type="submit" disabled={loading}
-            className="w-full bg-white text-black py-3 text-xs font-black tracking-widest uppercase hover:bg-white/90 disabled:bg-white/30 disabled:text-black/30 transition-colors duration-200"
+            className="w-full bg-white text-ink py-3 text-xs font-black tracking-widest uppercase hover:bg-white/90 disabled:bg-white/30 disabled:text-ink/30 transition-colors duration-200"
           >
             {loading ? 'Přihlašování...' : 'Přihlásit se'}
           </button>

@@ -190,7 +190,7 @@ export default function DatabasePage() {
                               className={`text-xs font-semibold px-2 py-1 bg-transparent border outline-none cursor-pointer ${st.color}`}
                             >
                               {Object.entries(STATUS_LABELS).map(([v, l]) => (
-                                <option key={v} value={v} className="bg-black text-white">{l.label}</option>
+                                <option key={v} value={v} className="bg-ink text-white">{l.label}</option>
                               ))}
                             </select>
                           </td>

@@ -1,13 +1,15 @@
 'use client';
 import { useMemo, useState } from 'react';
-import { STATUS_LABELS } from '@/lib/adminStatus';
-import { useAdminOrders } from '@/lib/useAdminOrders';
+import Link from 'next/link';
+import { STATUS_DOT } from '@/lib/adminStatus';
+import { useAdminOrders, type Order } from '@/lib/useAdminOrders';
 
 const MONTH_NAMES = [
   'Leden', 'Únor', 'Březen', 'Duben', 'Květen', 'Červen',
   'Červenec', 'Srpen', 'Září', 'Říjen', 'Listopad', 'Prosinec',
 ];
-const WEEKDAYS = ['Po', 'Út', 'St', 'Čt', 'Pá', 'So', 'Ne'];
+const WEEKDAYS = ['PO', 'ÚT', 'ST', 'ČT', 'PÁ', 'SO', 'NE'];
+const WEEKDAY_FULL = ['Neděle', 'Pondělí', 'Úterý', 'Středa', 'Čtvrtek', 'Pátek', 'Sobota'];
 
 const toKey = (d: Date) =>
   `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
@@ -15,14 +17,16 @@ const toKey = (d: Date) =>
 export default function CalendarPage() {
   const { orders: allOrders, isLoading: loading, error } = useAdminOrders();
   const orders = useMemo(() => allOrders.filter(o => !!o.service_date), [allOrders]);
+
+  const todayKey = useMemo(() => toKey(new Date()), []);
   const [cursor, setCursor] = useState(() => {
     const now = new Date();
     return new Date(now.getFullYear(), now.getMonth(), 1);
   });
-  const [selectedKey, setSelectedKey] = useState<string | null>(null);
+  const [selectedKey, setSelectedKey] = useState<string>(todayKey);
 
   const byDate = useMemo(() => {
-    const map = new Map<string, typeof orders>();
+    const map = new Map<string, Order[]>();
     orders.forEach(o => {
       if (!o.service_date) return;
       const key = o.service_date.slice(0, 10);
@@ -49,41 +53,23 @@ export default function CalendarPage() {
     return result;
   }, [cursor]);
 
-  const today = toKey(new Date());
-  const selectedOrders = selectedKey ? byDate.get(selectedKey) || [] : [];
+  const selectedDate = useMemo(() => {
+    const [y, m, d] = selectedKey.split('-').map(Number);
+    return new Date(y, m - 1, d);
+  }, [selectedKey]);
+  const selectedOrders = byDate.get(selectedKey) || [];
+
+  const goToday = () => {
+    const n = new Date();
+    setCursor(new Date(n.getFullYear(), n.getMonth(), 1));
+    setSelectedKey(todayKey);
+  };
 
   return (
     <div className="max-w-7xl mx-auto px-6 py-8">
-      <div className="mb-6 flex items-center justify-between">
-        <div>
-          <h1 className="text-2xl font-black text-white tracking-tight">Kalendář</h1>
-          <p className="text-white/35 text-sm mt-1">
-            Termíny realizace podle data uvedeného v objednávce.
-          </p>
-        </div>
-        <div className="flex items-center gap-3">
-          <button
-            onClick={() => setCursor(c => new Date(c.getFullYear(), c.getMonth() - 1, 1))}
-            className="w-8 h-8 border border-white/10 text-white/50 hover:text-white hover:border-white/30 transition-colors"
-          >
-            ‹
-          </button>
-          <span className="text-white text-sm font-semibold w-36 text-center">
-            {MONTH_NAMES[cursor.getMonth()]} {cursor.getFullYear()}
-          </span>
-          <button
-            onClick={() => setCursor(c => new Date(c.getFullYear(), c.getMonth() + 1, 1))}
-            className="w-8 h-8 border border-white/10 text-white/50 hover:text-white hover:border-white/30 transition-colors"
-          >
-            ›
-          </button>
-          <button
-            onClick={() => setCursor(() => { const n = new Date(); return new Date(n.getFullYear(), n.getMonth(), 1); })}
-            className="text-xs px-3 py-2 border border-white/10 text-white/50 hover:text-white hover:border-white/30 transition-colors"
-          >
-            Dnes
-          </button>
-        </div>
+      <div className="mb-6">
+        <h1 className="text-2xl font-black text-white tracking-tight">Kalendář</h1>
+        <p className="text-white/35 text-sm mt-1">Termíny realizace podle data uvedeného v objednávce.</p>
       </div>
 
       {error && (
@@ -92,81 +78,126 @@ export default function CalendarPage() {
         </div>
       )}
 
-      <div className="flex gap-4 items-start">
-        <div className="flex-[3] min-w-0">
-          <div className="grid grid-cols-7 gap-px bg-white/10 mb-px">
+      <div className="flex flex-col lg:flex-row gap-5 items-start">
+
+        {/* Agenda card */}
+        <div className="relative w-full lg:w-[300px] shrink-0 rounded-[28px] overflow-hidden bg-gradient-to-br from-[#1b2431] via-[#151b25] to-ink p-7 min-h-[420px]">
+          <div
+            className="absolute inset-0 opacity-[0.15] pointer-events-none"
+            style={{
+              backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.9) 1px, transparent 1px)',
+              backgroundSize: '24px 24px',
+            }}
+          />
+          <div className="relative">
+            <div className="flex items-start gap-4 mb-8">
+              <div className="text-6xl font-black text-white leading-none">
+                {String(selectedDate.getDate()).padStart(2, '0')}
+              </div>
+              <div className="pt-1.5">
+                <div className="text-accent text-sm font-bold">{MONTH_NAMES[selectedDate.getMonth()]}</div>
+                <div className="text-white/45 text-xs uppercase tracking-widest mt-0.5">
+                  {WEEKDAY_FULL[selectedDate.getDay()]}
+                </div>
+              </div>
+            </div>
+
+            {loading ? (
+              <div className="text-white/30 text-sm">Načítání...</div>
+            ) : selectedOrders.length === 0 ? (
+              <div className="text-white/30 text-sm">Žádné zakázky v tento den.</div>
+            ) : (
+              <div className="space-y-5">
+                {selectedOrders.map(o => (
+                  <div key={o.id} className="flex gap-3">
+                    <span className={`w-2 h-2 rounded-full mt-1.5 shrink-0 ${STATUS_DOT[o.status] || 'bg-white/40'}`} />
+                    <div className="min-w-0">
+                      <div className="text-white/40 text-[11px] uppercase tracking-wider mb-0.5">Celý den</div>
+                      <div className="text-white text-sm font-semibold truncate">{o.clients?.name || o.order_num}</div>
+                      <div className="text-white/40 text-xs truncate">{o.location}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Month card */}
+        <div className="flex-1 min-w-0 w-full rounded-[28px] bg-[#161616] border border-white/8 p-7">
+          <div className="flex items-center justify-between mb-6">
+            <button
+              onClick={() => setCursor(c => new Date(c.getFullYear(), c.getMonth() - 1, 1))}
+              className="w-9 h-9 rounded-full border border-white/10 text-white/50 hover:text-accent hover:border-accent/40 transition-colors flex items-center justify-center shrink-0"
+            >
+              ‹
+            </button>
+            <div className="text-center">
+              <button onClick={goToday} className="text-white/25 text-xs font-semibold hover:text-accent transition-colors">
+                {cursor.getFullYear()} · Dnes
+              </button>
+              <div className="text-white text-2xl font-black tracking-tight">{MONTH_NAMES[cursor.getMonth()]}</div>
+            </div>
+            <button
+              onClick={() => setCursor(c => new Date(c.getFullYear(), c.getMonth() + 1, 1))}
+              className="w-9 h-9 rounded-full border border-white/10 text-white/50 hover:text-accent hover:border-accent/40 transition-colors flex items-center justify-center shrink-0"
+            >
+              ›
+            </button>
+          </div>
+
+          <div className="grid grid-cols-7 mb-1">
             {WEEKDAYS.map(w => (
-              <div key={w} className="bg-[#1a1a1a] text-center text-xs font-semibold text-white/30 uppercase tracking-widest py-2">
+              <div key={w} className="text-center text-[11px] font-semibold text-white/25 tracking-widest py-1">
                 {w}
               </div>
             ))}
           </div>
-          <div className="grid grid-cols-7 gap-px bg-white/10">
+
+          <div className="grid grid-cols-7 gap-y-1.5">
             {weeks.flat().map((day, i) => {
               const key = toKey(day);
               const inMonth = day.getMonth() === cursor.getMonth();
               const dayOrders = byDate.get(key) || [];
               const isSelected = selectedKey === key;
+              const isToday = key === todayKey;
               return (
-                <button
-                  key={i}
-                  onClick={() => setSelectedKey(dayOrders.length ? (isSelected ? null : key) : null)}
-                  className={`bg-[#161616] text-left p-2 min-h-[86px] align-top transition-colors ${
-                    inMonth ? '' : 'opacity-30'
-                  } ${isSelected ? 'ring-1 ring-white/40' : ''} ${dayOrders.length ? 'hover:bg-[#1e1e1e] cursor-pointer' : 'cursor-default'}`}
-                >
-                  <div className={`text-xs mb-1.5 ${key === today ? 'text-white font-black' : 'text-white/40'}`}>
+                <div key={i} className="flex flex-col items-center gap-1">
+                  <button
+                    onClick={() => setSelectedKey(key)}
+                    className={`w-9 h-9 rounded-full text-sm transition-colors ${
+                      isSelected
+                        ? 'bg-accent text-ink font-bold'
+                        : isToday
+                          ? 'border border-accent text-accent font-semibold'
+                          : inMonth
+                            ? 'text-white/70 hover:bg-white/10'
+                            : 'text-white/15 hover:bg-white/5'
+                    }`}
+                  >
                     {day.getDate()}
+                  </button>
+                  <div className="flex gap-0.5 h-1.5">
+                    {dayOrders.slice(0, 3).map(o => (
+                      <span key={o.id} className={`w-1 h-1 rounded-full ${STATUS_DOT[o.status] || 'bg-white/40'}`} />
+                    ))}
                   </div>
-                  <div className="space-y-1">
-                    {dayOrders.slice(0, 3).map(o => {
-                      const st = STATUS_LABELS[o.status];
-                      return (
-                        <div key={o.id} className={`text-[10px] px-1.5 py-0.5 truncate ${st?.color || 'border border-white/10 text-white/40'}`}>
-                          {o.order_num}
-                        </div>
-                      );
-                    })}
-                    {dayOrders.length > 3 && (
-                      <div className="text-[10px] text-white/25">+{dayOrders.length - 3} další</div>
-                    )}
-                  </div>
-                </button>
+                </div>
               );
             })}
           </div>
-        </div>
 
-        {/* Day detail panel */}
-        <div className="flex-[1] min-w-[240px]">
-          <div className="bg-[#161616] border border-white/10 p-5 min-h-[200px]">
-            {!selectedKey ? (
-              <div className="text-white/25 text-sm">
-                {loading ? 'Načítání...' : 'Vyberte den se zakázkami pro zobrazení detailu.'}
-              </div>
-            ) : (
-              <>
-                <div className="text-xs text-white/30 uppercase tracking-widest mb-3">{selectedKey}</div>
-                <div className="space-y-3">
-                  {selectedOrders.map(o => {
-                    const st = STATUS_LABELS[o.status] || { label: o.status, color: 'border border-white/10 text-white/40' };
-                    return (
-                      <div key={o.id} className="border-b border-white/8 pb-3 last:border-0 last:pb-0">
-                        <div className="flex items-center gap-2 mb-1">
-                          <span className="font-mono text-xs font-semibold text-white">{o.order_num}</span>
-                          <span className={`text-xs px-1.5 py-0.5 border font-medium ${st.color}`}>{st.label}</span>
-                        </div>
-                        <div className="text-xs text-white/40">{o.clients?.name || '—'}</div>
-                        <div className="text-xs text-white/25 truncate">{o.location}</div>
-                        <div className="text-xs text-white/25">{o.total_area} m²</div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </>
-            )}
+          <div className="flex justify-center mt-6">
+            <Link
+              href="/order"
+              title="Nová objednávka"
+              className="w-12 h-12 rounded-full bg-accent text-ink flex items-center justify-center text-2xl font-black hover:bg-accent/90 transition-colors"
+            >
+              +
+            </Link>
           </div>
         </div>
+
       </div>
     </div>
   );

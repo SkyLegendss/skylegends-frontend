@@ -108,7 +108,7 @@ export default function OrderPage() {
 
   if (result) {
     return (
-      <div className="min-h-screen bg-black flex items-center justify-center px-6">
+      <div className="min-h-screen bg-ink flex items-center justify-center px-6">
         <div className="border border-white/10 p-12 max-w-md w-full text-center">
           <div className="w-12 h-12 border border-white/20 flex items-center justify-center mx-auto mb-8">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
@@ -125,7 +125,7 @@ export default function OrderPage() {
             <a
               href={result.pdf_url || `/api/orders/${result.order_num}/pdf`}
               target="_blank" rel="noopener"
-              className="block w-full bg-white text-black py-4 text-xs font-black tracking-widest uppercase hover:bg-white/90 transition-colors duration-200"
+              className="block w-full bg-white text-ink py-4 text-xs font-black tracking-widest uppercase hover:bg-white/90 transition-colors duration-200"
             >
               Stáhnout cenovou nabídku
             </a>
@@ -140,7 +140,7 @@ export default function OrderPage() {
   }
 
   return (
-    <div className="min-h-screen bg-black">
+    <div className="min-h-screen bg-ink">
       {/* Header */}
       <div className="border-b border-white/8">
         <div className="max-w-3xl mx-auto px-6 h-16 flex items-center justify-between">
@@ -188,7 +188,7 @@ export default function OrderPage() {
               <Field label="Typ budovy" id="building_type" value={form.building_type} onChange={set('building_type')}>
                 <select id="building_type" value={form.building_type} onChange={e => set('building_type')(e.target.value)}
                   className={selectClass}>
-                  {BUILDING_TYPES.map(t => <option key={t.value} value={t.value} className="bg-black">{t.label}</option>)}
+                  {BUILDING_TYPES.map(t => <option key={t.value} value={t.value} className="bg-ink">{t.label}</option>)}
                 </select>
               </Field>
               <Field label="Počet podlaží" id="floors" type="number" value={form.floors} onChange={set('floors')} placeholder="10" />
@@ -248,7 +248,7 @@ export default function OrderPage() {
           {/* Submit */}
           <button
             onClick={submit} disabled={loading}
-            className="w-full bg-white text-black py-5 text-xs font-black tracking-widest uppercase hover:bg-white/90 disabled:bg-white/30 disabled:text-black/30 transition-colors duration-200"
+            className="w-full bg-white text-ink py-5 text-xs font-black tracking-widest uppercase hover:bg-white/90 disabled:bg-white/30 disabled:text-ink/30 transition-colors duration-200"
           >
             {loading ? (
               <span className="flex items-center justify-center gap-3">

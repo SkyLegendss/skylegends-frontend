@@ -126,7 +126,7 @@ export default function OrderPdfGenerator() {
             <button
               onClick={() => setTemplate('kp1')}
               className={`flex-1 text-xs font-semibold px-3 py-2.5 border transition-colors ${
-                template === 'kp1' ? 'bg-white text-black border-white' : 'border-white/15 text-white/50 hover:border-white/30'
+                template === 'kp1' ? 'bg-white text-ink border-white' : 'border-white/15 text-white/50 hover:border-white/30'
               }`}
             >
               KP1 · Mytí dronem
@@ -134,7 +134,7 @@ export default function OrderPdfGenerator() {
             <button
               onClick={() => setTemplate('kp2')}
               className={`flex-1 text-xs font-semibold px-3 py-2.5 border transition-colors ${
-                template === 'kp2' ? 'bg-white text-black border-white' : 'border-white/15 text-white/50 hover:border-white/30'
+                template === 'kp2' ? 'bg-white text-ink border-white' : 'border-white/15 text-white/50 hover:border-white/30'
               }`}
             >
               KP2 · Horolezec + mřížky
@@ -150,7 +150,7 @@ export default function OrderPdfGenerator() {
                 <a
                   href={`${API_PUBLIC}/orders/${selected.order_num}/pdf`}
                   target="_blank" rel="noopener"
-                  className="block w-full text-center bg-white text-black py-3 text-xs font-black tracking-widest uppercase hover:bg-white/90 transition-colors duration-200"
+                  className="block w-full text-center bg-white text-ink py-3 text-xs font-black tracking-widest uppercase hover:bg-white/90 transition-colors duration-200"
                 >
                   Otevřít / stáhnout PDF
                 </a>
@@ -183,7 +183,7 @@ export default function OrderPdfGenerator() {
               <button
                 onClick={generateKp2}
                 disabled={!selected || generating}
-                className="w-full bg-white text-black py-3 text-xs font-black tracking-widest uppercase hover:bg-white/90 disabled:bg-white/20 disabled:text-white/30 transition-colors duration-200"
+                className="w-full bg-white text-ink py-3 text-xs font-black tracking-widest uppercase hover:bg-white/90 disabled:bg-white/20 disabled:text-white/30 transition-colors duration-200"
               >
                 {generating ? 'Generuji...' : !selected ? 'Nejprve vyberte zakázku' : 'Vygenerovat a otevřít PDF'}
               </button>

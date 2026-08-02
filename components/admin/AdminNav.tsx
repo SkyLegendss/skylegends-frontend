@@ -33,7 +33,7 @@ export default function AdminNav() {
                   key={tab.href}
                   href={tab.href}
                   className={`px-3 py-2 text-xs font-semibold uppercase tracking-widest transition-colors duration-200 ${
-                    active ? 'text-white border-b-2 border-white' : 'text-white/40 hover:text-white/70'
+                    active ? 'text-accent border-b-2 border-accent' : 'text-white/40 hover:text-white/70'
                   }`}
                 >
                   {tab.label}
@@ -44,7 +44,7 @@ export default function AdminNav() {
         </div>
         <div className="flex gap-2 items-center">
           <Link href="/order"
-            className="text-xs px-4 py-2 bg-white text-black font-bold hover:bg-white/90 transition-colors duration-200">
+            className="text-xs px-4 py-2 bg-white text-ink font-bold hover:bg-white/90 transition-colors duration-200">
             + Nová objednávka
           </Link>
           <button

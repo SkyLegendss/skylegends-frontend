@@ -35,7 +35,7 @@ export default function Home() {
   return (
     <>
       {/* ── NAV ── */}
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 lg:px-12 h-16 bg-black/70 backdrop-blur-md border-b border-white/5">
+      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 lg:px-12 h-16 bg-ink/70 backdrop-blur-md border-b border-white/5">
         <span className="font-black text-white text-base tracking-[0.15em] uppercase select-none">
           Sky Legends
         </span>
@@ -44,7 +44,7 @@ export default function Home() {
           <a href="#pricing" className="hover:text-white transition-colors duration-200">Nabídka</a>
           <a href="#faq" className="hover:text-white transition-colors duration-200">FAQ</a>
           <Link href="/order"
-            className="border border-white/30 hover:border-white hover:bg-white hover:text-black text-white px-5 py-2 text-xs font-bold tracking-widest uppercase transition-all duration-200">
+            className="border border-white/30 hover:border-white hover:bg-white hover:text-ink text-white px-5 py-2 text-xs font-bold tracking-widest uppercase transition-all duration-200">
             Objednat mytí
           </Link>
         </div>
@@ -57,7 +57,7 @@ export default function Home() {
       </nav>
 
       {/* ── HERO ── */}
-      <section className="relative h-screen overflow-hidden bg-black">
+      <section className="relative h-screen overflow-hidden bg-ink">
         {/* Hero video — autoplay when file is present */}
         <video
           autoPlay muted loop playsInline
@@ -68,8 +68,8 @@ export default function Home() {
         </video>
 
         {/* Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black" />
-        <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-b from-ink/40 via-transparent to-ink" />
+        <div className="absolute inset-0 bg-gradient-to-r from-ink/60 via-ink/20 to-transparent" />
 
         {/* Content — positioned at bottom left like SpaceX */}
         <div className="absolute bottom-0 left-0 right-0 z-10 max-w-7xl mx-auto px-8 lg:px-12 pb-20 lg:pb-28">
@@ -85,7 +85,7 @@ export default function Home() {
           </p>
           <div className="flex flex-wrap gap-3">
             <Link href="/order"
-              className="bg-white text-black px-8 py-4 text-xs font-black tracking-widest uppercase hover:bg-white/90 transition-colors duration-200">
+              className="bg-white text-ink px-8 py-4 text-xs font-black tracking-widest uppercase hover:bg-white/90 transition-colors duration-200">
               OBJEDNAT MYTÍ
             </Link>
             <a href="#how"
@@ -97,7 +97,7 @@ export default function Home() {
       </section>
 
       {/* ── STATS ── */}
-      <section className="bg-black border-b border-white/10 py-14">
+      <section className="bg-ink border-b border-white/10 py-14">
         <div className="max-w-7xl mx-auto px-8 lg:px-12">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
@@ -116,7 +116,7 @@ export default function Home() {
       </section>
 
       {/* ── HOW IT WORKS ── */}
-      <section id="how" className="py-32 bg-black">
+      <section id="how" className="py-32 bg-ink">
         <div className="max-w-7xl mx-auto px-8 lg:px-12">
           <div className="mb-20 fade-up">
             <p className="text-white/25 text-xs font-semibold uppercase tracking-[0.25em] mb-4">Postup</p>
@@ -126,7 +126,7 @@ export default function Home() {
             {steps.map((s, i) => (
               <div
                 key={i}
-                className="fade-up bg-black p-8 lg:p-10 hover:bg-white/3 transition-colors duration-300"
+                className="fade-up bg-ink p-8 lg:p-10 hover:bg-white/3 transition-colors duration-300"
                 style={{ transitionDelay: `${i * 80}ms` }}
               >
                 <div className="text-white/8 text-7xl font-black leading-none mb-8 select-none">{s.n}</div>
@@ -161,7 +161,7 @@ export default function Home() {
                 >
                   <source src={v.src} type="video/mp4" />
                 </video>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/60 to-transparent" />
                 <div className="absolute bottom-4 left-6 text-white/40 text-xs uppercase tracking-widest">{v.label}</div>
               </div>
             ))}
@@ -170,7 +170,7 @@ export default function Home() {
       </section>
 
       {/* ── PRICING ── */}
-      <section id="pricing" className="py-32 bg-black">
+      <section id="pricing" className="py-32 bg-ink">
         <div className="max-w-7xl mx-auto px-8 lg:px-12">
           <div className="mb-20 fade-up">
             <p className="text-white/25 text-xs font-semibold uppercase tracking-[0.25em] mb-4">Nabídka</p>
@@ -179,7 +179,7 @@ export default function Home() {
             </h2>
           </div>
           <div className="grid md:grid-cols-2 gap-px bg-white/8 fade-up">
-            <div className="bg-black p-10 lg:p-16">
+            <div className="bg-ink p-10 lg:p-16">
               <p className="text-white/55 text-base leading-relaxed mb-4 max-w-sm">
                 Cena závisí na rozsahu prací, typu budovy, dostupnosti a dalších faktorech.
               </p>
@@ -187,11 +187,11 @@ export default function Home() {
                 Vyplňte nezávazný dotazník a obdržíte cenovou nabídku na míru — rychle a bez závazků.
               </p>
               <Link href="/order"
-                className="inline-block bg-white text-black px-8 py-4 text-xs font-black tracking-widest uppercase hover:bg-white/90 transition-colors duration-200">
+                className="inline-block bg-white text-ink px-8 py-4 text-xs font-black tracking-widest uppercase hover:bg-white/90 transition-colors duration-200">
                 ZÍSKAT NABÍDKU ZDARMA
               </Link>
             </div>
-            <div className="bg-black p-10 lg:p-16">
+            <div className="bg-ink p-10 lg:p-16">
               <div className="space-y-0">
                 {[
                   ['Doprava v ceně', 'Vyjíždíme po celé České republice'],
@@ -242,7 +242,7 @@ export default function Home() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="py-32 bg-black border-t border-white/8">
+      <section className="py-32 bg-ink border-t border-white/8">
         <div className="max-w-7xl mx-auto px-8 lg:px-12 fade-up">
           <p className="text-white/25 text-xs font-semibold uppercase tracking-[0.25em] mb-6">Kontakt</p>
           <h2 className="text-5xl lg:text-7xl font-black text-white tracking-tight mb-8">
@@ -252,14 +252,14 @@ export default function Home() {
             Vyplňte objednávku za 2 minuty a stáhněte cenovou nabídku okamžitě.
           </p>
           <Link href="/order"
-            className="inline-block bg-white text-black px-10 py-5 text-xs font-black tracking-widest uppercase hover:bg-white/90 transition-colors duration-200">
+            className="inline-block bg-white text-ink px-10 py-5 text-xs font-black tracking-widest uppercase hover:bg-white/90 transition-colors duration-200">
             OBJEDNAT MYTÍ FASÁDY
           </Link>
         </div>
       </section>
 
       {/* ── FOOTER ── */}
-      <footer className="bg-black border-t border-white/10 py-20">
+      <footer className="bg-ink border-t border-white/10 py-20">
         <div className="max-w-7xl mx-auto px-8 lg:px-12">
           <div className="grid md:grid-cols-3 gap-12 mb-16">
             <div>

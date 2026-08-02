@@ -224,7 +224,7 @@ export default function CustomQuoteBuilder() {
       <button
         onClick={generate}
         disabled={generating}
-        className="w-full bg-white text-black py-4 text-xs font-black tracking-widest uppercase hover:bg-white/90 disabled:bg-white/20 disabled:text-white/30 transition-colors duration-200"
+        className="w-full bg-white text-ink py-4 text-xs font-black tracking-widest uppercase hover:bg-white/90 disabled:bg-white/20 disabled:text-white/30 transition-colors duration-200"
       >
         {generating ? 'Generuji...' : 'Vygenerovat a otevřít PDF'}
       </button>

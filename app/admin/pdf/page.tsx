@@ -17,7 +17,7 @@ export default function PdfBuilderPage() {
         <button
           onClick={() => setMode('custom')}
           className={`px-4 py-2.5 text-xs font-semibold uppercase tracking-widest border transition-colors ${
-            mode === 'custom' ? 'bg-white text-black border-white' : 'border-white/15 text-white/50 hover:border-white/30'
+            mode === 'custom' ? 'bg-white text-ink border-white' : 'border-white/15 text-white/50 hover:border-white/30'
           }`}
         >
           Vlastní konstruktor
@@ -25,7 +25,7 @@ export default function PdfBuilderPage() {
         <button
           onClick={() => setMode('order')}
           className={`px-4 py-2.5 text-xs font-semibold uppercase tracking-widest border transition-colors ${
-            mode === 'order' ? 'bg-white text-black border-white' : 'border-white/15 text-white/50 hover:border-white/30'
+            mode === 'order' ? 'bg-white text-ink border-white' : 'border-white/15 text-white/50 hover:border-white/30'
           }`}
         >
           Podle objednávky
