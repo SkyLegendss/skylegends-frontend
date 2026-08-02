@@ -297,7 +297,7 @@ export default function Home() {
             </div>
           </div>
           <div className="pt-4 text-center">
-            <span className="text-[10px] text-white/5 select-none">created by pashaslesar</span>
+            <span className="text-[10px] text-white select-none">created by pashaslesar</span>
           </div>
         </div>
       </footer>
