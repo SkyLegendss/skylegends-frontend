@@ -18,5 +18,12 @@ export async function PATCH(req: NextRequest) {
   });
 
   const data = await res.json();
-  return NextResponse.json(data);
+
+  if (res.status === 401) {
+    console.error('[admin/status] PATCH rejected: ADMIN_API_KEY does not match backend. Check ADMIN_API_KEY env var.');
+  } else if (!res.ok) {
+    console.error(`[admin/status] PATCH failed with status ${res.status}:`, data);
+  }
+
+  return NextResponse.json(data, { status: res.status });
 }

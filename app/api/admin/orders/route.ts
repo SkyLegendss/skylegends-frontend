@@ -16,6 +16,13 @@ export async function DELETE(req: Request) {
   });
 
   const data = await res.json();
+
+  if (res.status === 401) {
+    console.error('[admin/orders] DELETE rejected: ADMIN_API_KEY does not match backend. Check ADMIN_API_KEY env var.');
+  } else if (!res.ok) {
+    console.error(`[admin/orders] DELETE failed with status ${res.status}:`, data);
+  }
+
   return NextResponse.json(data, { status: res.status });
 }
 
@@ -29,6 +36,16 @@ export async function GET() {
     fetch(`${API}/orders?limit=500`, { headers }),
     fetch(`${API}/stats`, { headers }),
   ]);
+
+  if (ordersRes.status === 401 || statsRes.status === 401) {
+    console.error('[admin/orders] GET rejected: ADMIN_API_KEY does not match backend. Check ADMIN_API_KEY env var.');
+    return NextResponse.json({ error: 'Unauthorized: invalid ADMIN_API_KEY' }, { status: 401 });
+  }
+
+  if (!ordersRes.ok || !statsRes.ok) {
+    console.error(`[admin/orders] GET failed: orders=${ordersRes.status} stats=${statsRes.status}`);
+    return NextResponse.json({ error: 'Failed to fetch admin data' }, { status: 502 });
+  }
 
   const orders = await ordersRes.json();
   const stats = await statsRes.json();
