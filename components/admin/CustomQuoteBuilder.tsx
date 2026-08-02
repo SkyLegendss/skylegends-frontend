@@ -22,6 +22,7 @@ export default function CustomQuoteBuilder() {
 
   const [noItems, setNoItems] = useState(false);
   const [items, setItems] = useState<Item[]>([newItem()]);
+  const [manualTotal, setManualTotal] = useState('');
 
   const [title, setTitle] = useState('');
   const [location, setLocation] = useState('');
@@ -41,14 +42,14 @@ export default function CustomQuoteBuilder() {
     setItems(list => (list.length > 1 ? list.filter(i => i.id !== id) : list));
 
   const total = useMemo(() => {
-    if (noItems) return 0;
+    if (noItems) return parseFloat(manualTotal) || 0;
     return items.reduce((sum, i) => {
       if (!i.showPrice) return sum;
       const qty = parseFloat(i.quantity) || 0;
       const price = parseFloat(i.unitPrice) || 0;
       return sum + qty * price;
     }, 0);
-  }, [items, noItems]);
+  }, [items, noItems, manualTotal]);
 
   const generate = async () => {
     setGenerating(true);
@@ -66,6 +67,7 @@ export default function CustomQuoteBuilder() {
             show_price: i.showPrice,
             unit_price: i.showPrice ? (parseFloat(i.unitPrice) || 0) : null,
           })),
+        manual_total: noItems ? (parseFloat(manualTotal) || null) : null,
         title, location, service_date: serviceDate, notes,
       };
       const res = await fetch('/api/admin/pdf/quote', {
@@ -177,6 +179,19 @@ export default function CustomQuoteBuilder() {
                 <span className="text-white font-semibold">{total.toLocaleString('cs-CZ')} Kč</span>
               </div>
             )}
+          </div>
+        )}
+
+        {noItems && (
+          <div>
+            <label className="block text-xs text-white/40 mb-1">Celková cena (Kč, bez DPH) — nepovinné</label>
+            <input
+              className={inputClass + ' max-w-[220px]'}
+              type="number"
+              placeholder="Bez zadání se v PDF uvede „cena bude upřesněna“"
+              value={manualTotal}
+              onChange={e => setManualTotal(e.target.value)}
+            />
           </div>
         )}
       </div>
