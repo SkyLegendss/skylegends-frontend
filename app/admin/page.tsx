@@ -1,19 +1,7 @@
 'use client';
-import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { STATUS_LABELS } from '@/lib/adminStatus';
-
-type Order = {
-  id: string; order_num: string; created_at: string;
-  location: string; total_area: number; total_price: number; status: string;
-  clients?: { name: string; email: string; company?: string };
-};
-
-type Stats = {
-  total_orders: number; total_clients: number;
-  total_area: number; total_revenue: number;
-  by_status: Record<string, number>;
-};
+import { useAdminOrders } from '@/lib/useAdminOrders';
 
 const TILES = [
   {
@@ -31,26 +19,7 @@ const TILES = [
 ];
 
 export default function AdminHome() {
-  const [orders, setOrders] = useState<Order[]>([]);
-  const [stats, setStats] = useState<Stats | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const res = await fetch('/api/admin/orders');
-        if (res.status === 401) { setError('Přístup odepřen.'); return; }
-        const { orders: o, stats: s } = await res.json();
-        setOrders(o?.data || []);
-        setStats(s || null);
-      } catch {
-        setError('Nepodařilo se načíst data.');
-      } finally {
-        setLoading(false);
-      }
-    })();
-  }, []);
+  const { orders, stats, isLoading: loading, error } = useAdminOrders();
 
   const recent = orders.slice(0, 6);
 
@@ -63,7 +32,7 @@ export default function AdminHome() {
 
       {error && (
         <div className="border border-red-500/30 bg-red-500/8 text-red-400 px-5 py-3 text-sm mb-6">
-          {error}
+          {error.status === 401 ? 'Přístup odepřen.' : 'Nepodařilo se načíst data.'}
         </div>
       )}
 

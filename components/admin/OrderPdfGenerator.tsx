@@ -1,12 +1,8 @@
 'use client';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
+import { useAdminOrders, type Order } from '@/lib/useAdminOrders';
 
 const API_PUBLIC = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
-
-type Order = {
-  id: string; order_num: string; created_at: string; location: string;
-  clients?: { name: string; email: string; company?: string };
-};
 
 type Kp2Form = {
   climber_days: string; climber_total: string; buildings: string;
@@ -28,30 +24,13 @@ const KP2_FIELDS: { key: keyof Kp2Form; label: string }[] = [
 ];
 
 export default function OrderPdfGenerator() {
-  const [orders, setOrders] = useState<Order[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const { orders, isLoading: loading, error } = useAdminOrders();
   const [search, setSearch] = useState('');
   const [selected, setSelected] = useState<Order | null>(null);
   const [template, setTemplate] = useState<'kp1' | 'kp2'>('kp1');
   const [form, setForm] = useState<Kp2Form>(KP2_DEFAULTS);
   const [generating, setGenerating] = useState(false);
   const [genError, setGenError] = useState('');
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const res = await fetch('/api/admin/orders');
-        if (res.status === 401) { setError('Přístup odepřen.'); return; }
-        const { orders: o } = await res.json();
-        setOrders(o?.data || []);
-      } catch {
-        setError('Nepodařilo se načíst data.');
-      } finally {
-        setLoading(false);
-      }
-    })();
-  }, []);
 
   const filtered = useMemo(() => {
     const q = search.toLowerCase();
@@ -91,7 +70,9 @@ export default function OrderPdfGenerator() {
   return (
     <div>
       {error && (
-        <div className="border border-red-500/30 bg-red-500/8 text-red-400 px-5 py-3 text-sm mb-6">{error}</div>
+        <div className="border border-red-500/30 bg-red-500/8 text-red-400 px-5 py-3 text-sm mb-6">
+          {error.status === 401 ? 'Přístup odepřen.' : 'Nepodařilo se načíst data.'}
+        </div>
       )}
 
       <div className="grid md:grid-cols-2 gap-4">

@@ -1,12 +1,7 @@
 'use client';
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { STATUS_LABELS } from '@/lib/adminStatus';
-
-type Order = {
-  id: string; order_num: string; location: string; status: string;
-  service_date?: string; total_area: number;
-  clients?: { name: string; email: string };
-};
+import { useAdminOrders } from '@/lib/useAdminOrders';
 
 const MONTH_NAMES = [
   'Leden', 'Únor', 'Březen', 'Duben', 'Květen', 'Červen',
@@ -18,32 +13,16 @@ const toKey = (d: Date) =>
   `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 
 export default function CalendarPage() {
-  const [orders, setOrders] = useState<Order[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const { orders: allOrders, isLoading: loading, error } = useAdminOrders();
+  const orders = useMemo(() => allOrders.filter(o => !!o.service_date), [allOrders]);
   const [cursor, setCursor] = useState(() => {
     const now = new Date();
     return new Date(now.getFullYear(), now.getMonth(), 1);
   });
   const [selectedKey, setSelectedKey] = useState<string | null>(null);
 
-  useEffect(() => {
-    (async () => {
-      try {
-        const res = await fetch('/api/admin/orders');
-        if (res.status === 401) { setError('Přístup odepřen.'); return; }
-        const { orders: o } = await res.json();
-        setOrders((o?.data || []).filter((x: Order) => !!x.service_date));
-      } catch {
-        setError('Nepodařilo se načíst data.');
-      } finally {
-        setLoading(false);
-      }
-    })();
-  }, []);
-
   const byDate = useMemo(() => {
-    const map = new Map<string, Order[]>();
+    const map = new Map<string, typeof orders>();
     orders.forEach(o => {
       if (!o.service_date) return;
       const key = o.service_date.slice(0, 10);
@@ -108,7 +87,9 @@ export default function CalendarPage() {
       </div>
 
       {error && (
-        <div className="border border-red-500/30 bg-red-500/8 text-red-400 px-5 py-3 text-sm mb-6">{error}</div>
+        <div className="border border-red-500/30 bg-red-500/8 text-red-400 px-5 py-3 text-sm mb-6">
+          {error.status === 401 ? 'Přístup odepřen.' : 'Nepodařilo se načíst data.'}
+        </div>
       )}
 
       <div className="flex gap-4 items-start">

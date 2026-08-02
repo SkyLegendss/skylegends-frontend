@@ -1,16 +1,9 @@
 'use client';
-import { useEffect, useState, useMemo } from 'react';
+import { useState, useMemo } from 'react';
 import { STATUS_LABELS } from '@/lib/adminStatus';
+import { useAdminOrders } from '@/lib/useAdminOrders';
 
 const API_PUBLIC = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
-
-type Order = {
-  id: string; order_num: string; created_at: string;
-  location: string; facade_area: number; window_area: number;
-  total_area: number; total_price: number; status: string;
-  pdf_url?: string; notes?: string; service_date?: string;
-  clients?: { name: string; email: string; phone: string; company?: string };
-};
 
 type ClientInfo = {
   name: string; email: string; phone: string; company?: string;
@@ -18,30 +11,11 @@ type ClientInfo = {
 };
 
 export default function DatabasePage() {
-  const [orders, setOrders] = useState<Order[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const { orders, isLoading: loading, error, mutate } = useAdminOrders();
   const [orderSearch, setOrderSearch] = useState('');
   const [clientSearch, setClientSearch] = useState('');
   const [selectedClient, setSelectedClient] = useState<ClientInfo | null>(null);
   const [confirmDelete, setConfirmDelete] = useState<string | null>(null);
-
-  const fetchData = async () => {
-    setLoading(true);
-    setError('');
-    try {
-      const res = await fetch('/api/admin/orders');
-      if (res.status === 401) { setError('Přístup odepřen.'); return; }
-      const { orders: o } = await res.json();
-      setOrders(o?.data || []);
-    } catch {
-      setError('Nepodařilo se načíst data.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => { fetchData(); }, []);
 
   const updateStatus = async (orderNum: string, status: string) => {
     await fetch('/api/admin/status', {
@@ -49,7 +23,7 @@ export default function DatabasePage() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ orderNum, status }),
     });
-    fetchData();
+    mutate();
   };
 
   const deleteOrder = async (orderNum: string) => {
@@ -59,7 +33,7 @@ export default function DatabasePage() {
       body: JSON.stringify({ orderNum }),
     });
     setConfirmDelete(null);
-    fetchData();
+    mutate();
   };
 
   const exportCSV = () => {
@@ -127,8 +101,8 @@ export default function DatabasePage() {
 
       {error && (
         <div className="border border-red-500/30 bg-red-500/8 text-red-400 px-5 py-3 text-sm mb-6">
-          {error} —{' '}
-          <button onClick={fetchData} className="underline hover:no-underline">Zkusit znovu</button>
+          {error.status === 401 ? 'Přístup odepřen.' : 'Nepodařilo se načíst data.'} —{' '}
+          <button onClick={() => mutate()} className="underline hover:no-underline">Zkusit znovu</button>
         </div>
       )}
 
