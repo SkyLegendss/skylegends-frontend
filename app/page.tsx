@@ -296,6 +296,9 @@ export default function Home() {
               <a href="#faq" className="hover:text-white/60 transition-colors">FAQ</a>
             </div>
           </div>
+          <div className="pt-4 text-center">
+            <span className="text-[10px] text-white/5 select-none">created by pashaslesar</span>
+          </div>
         </div>
       </footer>
     </>
