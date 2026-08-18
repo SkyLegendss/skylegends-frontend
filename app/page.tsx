@@ -28,7 +28,7 @@ export default function Home() {
     { q: 'Jak dlouho trvá mytí?', a: 'Záleží na ploše. Typicky 500 m² zvládneme za jeden pracovní den. Předběžný čas sdělíme při potvrzení objednávky.' },
     { q: 'Jaké povrchy drony zvládnou?', a: 'Sklo, hliník, beton, EIFS fasády, keramika. Před zahájením provedeme zkoušku kompatibility na vzorku.' },
     { q: 'Funguje to v zimě?', a: 'Provozní teplota dronů je +5 °C a výše. V zimních měsících doporučujeme konzultaci termínu.' },
-    { q: 'Je potřeba speciální příprava?', a: 'Ne. Potřebujeme přístup k elektrické zásuvce (230 V) a volný vzdušný prostor kolem budovy.' },
+    { q: 'Je potřeba speciální příprava?', a: 'Ne. Potřebujeme přístup k elektrické zásuvce (230 V),vzdušný prostor kolem budovy, připojení k vodovodu.' },
     { q: 'Kde působíte?', a: 'Operujeme po celé České republice. Sídlíme v Pardubicích a vyjíždíme na základě dohody.' },
   ];
 
@@ -194,7 +194,7 @@ export default function Home() {
             <div className="bg-ink p-10 lg:p-16">
               <div className="space-y-0">
                 {[
-                  ['Doprava v ceně', 'Vyjíždíme po celé České republice'],
+                  ['Doprava v ceně', 'Doprava je v ceně v rámci Pardubického kraje a Prahy. Výjezdy do ostatních krajů jsou možné po předchozí domluvě.'],
                   ['Ekologické prostředky', 'Šetrné k fasádám i životnímu prostředí'],
                   ['Fotodokumentace', 'Před a po mytí — plná dokumentace'],
                   ['Nabídka okamžitě', 'PDF nabídka ihned po odeslání dotazníku'],
