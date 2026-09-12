@@ -85,14 +85,14 @@ export default function SkoleniPage() {
           />
         </div>
         <div className="absolute inset-0 bg-gradient-to-b from-ink/20 via-transparent to-ink" />
-        <CornerFrame inset={24} className="border-accent/40" />
+        <CornerFrame />
 
         <div className="relative z-10 max-w-7xl mx-auto px-8 lg:px-12 pb-20 lg:pb-28 pt-32">
           <p className="text-white/40 text-xs font-medium uppercase tracking-[0.3em] mb-6">
             Česká republika · Školení pilotů dronů
           </p>
           <h1 className="text-[clamp(2.75rem,8vw,6.5rem)] font-black text-white leading-[0.95] tracking-tight mb-8">
-            ŠKOLENÍ PILOTŮ DRONŮ.
+            ŠKOLENÍ PILOTŮ <span className="text-accent">DRONŮ.</span>
           </h1>
           <p className="text-white/55 text-base lg:text-lg max-w-xl mb-10 leading-relaxed">
             Od prvního vzletu až po bezpečné využití dronů ve firmě. Praktické školení pro začátečníky,
@@ -185,7 +185,7 @@ export default function SkoleniPage() {
       </section>
 
       {/* ── CO SE NAUČÍTE ── */}
-      <section className="py-32 bg-[#080808]">
+      <section className="py-32 bg-ink border-t border-white/8">
         <div className="max-w-7xl mx-auto px-8 lg:px-12">
           <div className="mb-20 fade-up">
             <p className="text-white/25 text-xs font-semibold uppercase tracking-[0.25em] mb-4">Obsah</p>
@@ -194,7 +194,7 @@ export default function SkoleniPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-white/8">
             {WHAT_YOU_LEARN.map((item, i) => (
               <div key={item.title}
-                className="fade-up bg-[#080808] p-8 lg:p-10 hover:bg-white/3 transition-colors duration-300"
+                className="fade-up bg-ink p-8 lg:p-10 hover:bg-white/3 transition-colors duration-300"
                 style={{ transitionDelay: `${i * 60}ms` }}>
                 <item.icon className="text-white/50 mb-6" size={28} strokeWidth={1.5} />
                 <h3 className="font-bold text-white text-base mb-3 leading-snug">{item.title}</h3>
@@ -245,7 +245,7 @@ export default function SkoleniPage() {
       </section>
 
       {/* ── JAK ŠKOLENÍ PROBÍHÁ ── */}
-      <section className="py-32 bg-[#080808]">
+      <section className="py-32 bg-ink border-t border-white/8">
         <div className="max-w-7xl mx-auto px-8 lg:px-12">
           <div className="mb-20 fade-up">
             <p className="text-white/25 text-xs font-semibold uppercase tracking-[0.25em] mb-4">Postup</p>
@@ -254,7 +254,7 @@ export default function SkoleniPage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-px bg-white/8">
             {PROCESS_STEPS.map((s, i) => (
               <div key={s.n}
-                className="fade-up bg-[#080808] p-8 lg:p-10 hover:bg-white/3 transition-colors duration-300"
+                className="fade-up bg-ink p-8 lg:p-10 hover:bg-white/3 transition-colors duration-300"
                 style={{ transitionDelay: `${i * 80}ms` }}>
                 <div className="text-white/8 text-7xl font-black leading-none mb-8 select-none">{s.n}</div>
                 <h3 className="font-bold text-white text-base mb-3 leading-snug">{s.title}</h3>
@@ -287,7 +287,7 @@ export default function SkoleniPage() {
       </section>
 
       {/* ── FAQ ── */}
-      <section className="py-32 bg-[#080808]">
+      <section className="py-32 bg-ink border-t border-white/8">
         <div className="max-w-4xl mx-auto px-8 lg:px-12">
           <div className="mb-20 fade-up">
             <p className="text-white/25 text-xs font-semibold uppercase tracking-[0.25em] mb-4">FAQ</p>

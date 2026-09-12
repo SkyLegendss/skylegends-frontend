@@ -55,7 +55,7 @@ export default function Home() {
         {/* Overlays */}
         <div className="absolute inset-0 bg-gradient-to-b from-ink/40 via-transparent to-ink" />
         <div className="absolute inset-0 bg-gradient-to-r from-ink/60 via-ink/20 to-transparent" />
-        <CornerFrame inset={24} className="border-accent/40" />
+        <CornerFrame />
 
         {/* Content — positioned at bottom left like SpaceX */}
         <div className="absolute bottom-0 left-0 right-0 z-10 max-w-7xl mx-auto px-8 lg:px-12 pb-20 lg:pb-28">
@@ -63,7 +63,7 @@ export default function Home() {
             Česká republika · Profesionální mytí fasád
           </p>
           <h1 className="text-[clamp(4rem,11vw,9rem)] font-black text-white leading-[0.92] tracking-tight mb-8">
-            ČISTÁ<br />FASÁDA.
+            ČISTÁ<br /><span className="text-accent">FASÁDA.</span>
           </h1>
           <p className="text-white/55 text-base lg:text-lg max-w-md mb-10 leading-relaxed">
             Mytí fasád a oken výškových budov pomocí autonomních dronů.
@@ -125,7 +125,7 @@ export default function Home() {
       </section>
 
     {/* ── GALLERY ── */}
-<section className="py-32 bg-[#080808]">
+<section className="py-32 bg-ink border-t border-white/8">
   <div className="max-w-7xl mx-auto px-8 lg:px-12">
 
     <div className="mb-20 fade-up">
@@ -174,11 +174,12 @@ export default function Home() {
       {/* ── ŠKOLENÍ PREVIEW ── */}
       <section className="py-20 bg-ink border-y border-white/8">
         <div className="max-w-7xl mx-auto px-8 lg:px-12 fade-up">
-          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 border border-white/10 p-10 lg:p-14">
+          <div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-8 border border-white/10 p-10 lg:p-14">
+            <CornerFrame inset={{ top: 16, right: 16, bottom: 16, left: 16 }} size={20} />
             <div>
-              <p className="text-accent text-xs font-black uppercase tracking-[0.25em] mb-4">Nově</p>
+              <p className="text-white text-xs font-black uppercase tracking-[0.25em] mb-4">Sky Legends</p>
               <h2 className="text-3xl lg:text-4xl font-black text-white tracking-tight mb-4">
-                ŠKOLENÍ PILOTŮ DRONŮ
+                ŠKOLENÍ PILOTŮ <span className="text-accent">DRONŮ</span>
               </h2>
               <p className="text-white/40 text-sm lg:text-base max-w-xl leading-relaxed">
                 Chcete začít létat, zlepšit své schopnosti nebo vyškolit firemní tým? Nabízíme praktické školení
@@ -239,7 +240,7 @@ export default function Home() {
       </section>
 
       {/* ── FAQ ── */}
-      <section id="faq" className="py-32 bg-[#080808]">
+      <section id="faq" className="py-32 bg-ink border-t border-white/8">
         <div className="max-w-4xl mx-auto px-8 lg:px-12">
           <div className="mb-20 fade-up">
             <p className="text-white/25 text-xs font-semibold uppercase tracking-[0.25em] mb-4">FAQ</p>
