@@ -1,6 +1,8 @@
 'use client';
 import { useEffect } from 'react';
 import Link from 'next/link';
+import SiteNav from '../components/SiteNav';
+import SiteFooter from '../components/SiteFooter';
 
 function useFadeUp() {
   useEffect(() => {
@@ -35,26 +37,7 @@ export default function Home() {
   return (
     <>
       {/* ── NAV ── */}
-      <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 lg:px-12 h-16 bg-ink/70 backdrop-blur-md border-b border-white/5">
-        <span className="font-black text-white text-base tracking-[0.15em] uppercase select-none">
-          Sky Legends
-        </span>
-        <div className="hidden md:flex items-center gap-8 text-sm text-white/60">
-          <a href="#how" className="hover:text-white transition-colors duration-200">Jak to funguje</a>
-          <a href="#pricing" className="hover:text-white transition-colors duration-200">Nabídka</a>
-          <a href="#faq" className="hover:text-white transition-colors duration-200">FAQ</a>
-          <Link href="/order"
-            className="border border-white/30 hover:border-white hover:bg-white hover:text-ink text-white px-5 py-2 text-xs font-bold tracking-widest uppercase transition-all duration-200">
-            Objednat mytí
-          </Link>
-        </div>
-        <div className="md:hidden">
-          <Link href="/order"
-            className="border border-white/30 text-white px-4 py-2 text-xs font-bold tracking-widest uppercase">
-            Objednat
-          </Link>
-        </div>
-      </nav>
+      <SiteNav />
 
       {/* ── HERO ── */}
       <section className="relative h-screen overflow-hidden bg-ink">
@@ -169,6 +152,28 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── ŠKOLENÍ PREVIEW ── */}
+      <section className="py-20 bg-ink border-y border-white/8">
+        <div className="max-w-7xl mx-auto px-8 lg:px-12 fade-up">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8 border border-white/10 p-10 lg:p-14">
+            <div>
+              <p className="text-accent text-xs font-black uppercase tracking-[0.25em] mb-4">Nově</p>
+              <h2 className="text-3xl lg:text-4xl font-black text-white tracking-tight mb-4">
+                ŠKOLENÍ PILOTŮ DRONŮ
+              </h2>
+              <p className="text-white/40 text-sm lg:text-base max-w-xl leading-relaxed">
+                Chcete začít létat, zlepšit své schopnosti nebo vyškolit firemní tým? Nabízíme praktické školení
+                pilotů dronů pro začátečníky i firmy.
+              </p>
+            </div>
+            <Link href="/skoleni"
+              className="shrink-0 inline-block border border-white/30 text-white px-8 py-4 text-xs font-black tracking-widest uppercase hover:border-white hover:bg-white hover:text-ink transition-all duration-200 whitespace-nowrap">
+              Více o školení →
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* ── PRICING ── */}
       <section id="pricing" className="py-32 bg-ink">
         <div className="max-w-7xl mx-auto px-8 lg:px-12">
@@ -259,48 +264,7 @@ export default function Home() {
       </section>
 
       {/* ── FOOTER ── */}
-      <footer className="bg-ink border-t border-white/10 py-20">
-        <div className="max-w-7xl mx-auto px-8 lg:px-12">
-          <div className="grid md:grid-cols-3 gap-12 mb-16">
-            <div>
-              <div className="font-black text-white text-base tracking-[0.15em] uppercase mb-4">Sky Legends</div>
-              <div className="text-white/35 text-sm leading-relaxed max-w-xs">
-                Profesionální mytí fasád a oken výškových budov pomocí autonomních dronů. Bez lešení, za pevnou cenu.
-              </div>
-            </div>
-            <div>
-              <div className="text-white/25 text-xs uppercase tracking-[0.2em] mb-5">Kontakt</div>
-              <div className="text-white/55 text-sm space-y-2 leading-relaxed">
-                <div>info@skylegends.eu</div>
-                <div>774 306 718</div>
-                <div className="text-white/35">
-                  Jiráskova 2860, Zelené Předměstí<br />
-                  530 02 Pardubice
-                </div>
-              </div>
-            </div>
-            <div>
-              <div className="text-white/25 text-xs uppercase tracking-[0.2em] mb-5">Společnost</div>
-              <div className="text-white/35 text-sm space-y-1.5 leading-relaxed">
-                <div className="text-white/55">SENTEMOV GROUP s.r.o.</div>
-                <div>IČO: 23089768</div>
-                <div>DIČ: CZ23089768</div>
-              </div>
-            </div>
-          </div>
-          <div className="border-t border-white/8 pt-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-            <div className="text-xs text-white/20">© 2025 SENTEMOV GROUP s.r.o. Všechna práva vyhrazena.</div>
-            <div className="flex gap-6 text-xs text-white/25">
-              <Link href="/order" className="hover:text-white/60 transition-colors">Objednat</Link>
-              <a href="#how" className="hover:text-white/60 transition-colors">Jak to funguje</a>
-              <a href="#faq" className="hover:text-white/60 transition-colors">FAQ</a>
-            </div>
-          </div>
-          <div className="pt-4 text-center">
-            <span className="text-[10px] text-white select-none">created by pashaslesar</span>
-          </div>
-        </div>
-      </footer>
+      <SiteFooter />
     </>
   );
 }
