@@ -91,7 +91,7 @@ export default function SkoleniPage() {
           <p className="text-white/40 text-xs font-medium uppercase tracking-[0.3em] mb-6">
             Česká republika · Školení pilotů dronů
           </p>
-          <h1 className="text-[clamp(2.75rem,8vw,6.5rem)] font-black text-white leading-[0.95] tracking-tight mb-8">
+          <h1 className="text-[clamp(2.75rem,8vw,6.5rem)] font-black text-white leading-[1.05] tracking-tight mb-8">
             ŠKOLENÍ PILOTŮ <span className="text-accent">DRONŮ.</span>
           </h1>
           <p className="text-white/55 text-base lg:text-lg max-w-xl mb-10 leading-relaxed">

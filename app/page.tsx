@@ -62,7 +62,7 @@ export default function Home() {
           <p className="text-white/40 text-xs font-medium uppercase tracking-[0.3em] mb-6">
             Česká republika · Profesionální mytí fasád
           </p>
-          <h1 className="text-[clamp(4rem,11vw,9rem)] font-black text-white leading-[0.92] tracking-tight mb-8">
+          <h1 className="text-[clamp(4rem,11vw,9rem)] font-black text-white leading-[1.05] tracking-tight mb-8">
             ČISTÁ<br /><span className="text-accent">FASÁDA.</span>
           </h1>
           <p className="text-white/55 text-base lg:text-lg max-w-md mb-10 leading-relaxed">
