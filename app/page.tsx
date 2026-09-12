@@ -30,7 +30,7 @@ export default function Home() {
     { q: 'Jak dlouho trvá mytí?', a: 'Záleží na ploše. Typicky 500 m² zvládneme za jeden pracovní den. Předběžný čas sdělíme při potvrzení objednávky.' },
     { q: 'Jaké povrchy drony zvládnou?', a: 'Sklo, hliník, beton, EIFS fasády, keramika. Před zahájením provedeme zkoušku kompatibility na vzorku.' },
     { q: 'Funguje to v zimě?', a: 'Provozní teplota dronů je +5 °C a výše. V zimních měsících doporučujeme konzultaci termínu.' },
-    { q: 'Je potřeba speciální příprava?', a: 'Ne. Potřebujeme přístup k elektrické zásuvce (230 V) a volný vzdušný prostor kolem budovy.' },
+    { q: 'Je potřeba speciální příprava?', a: 'Ne. Potřebujeme přístup k elektrické zásuvce (230 V),vzdušný prostor kolem budovy, připojení k vodovodu.' },
     { q: 'Kde působíte?', a: 'Operujeme po celé České republice. Sídlíme v Pardubicích a vyjíždíme na základě dohody.' },
   ];
 
@@ -121,36 +121,52 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── VIDEO ── */}
-      <section className="py-32 bg-[#080808]">
-        <div className="max-w-7xl mx-auto px-8 lg:px-12">
-          <div className="mb-20 fade-up">
-            <p className="text-white/25 text-xs font-semibold uppercase tracking-[0.25em] mb-4">Galerie</p>
-            <h2 className="text-5xl lg:text-7xl font-black text-white tracking-tight">DRONY V AKCI</h2>
-          </div>
-          <div className="grid md:grid-cols-2 gap-2">
-            {[
-              { src: '/videos/wash1.mp4', label: 'Mytí fasády' },
-              { src: '/videos/wash2.mp4', label: 'Čištění oken' },
-            ].map((v, i) => (
-              <div
-                key={i}
-                className="fade-up relative aspect-video bg-[#111] border border-white/5 overflow-hidden group"
-                style={{ transitionDelay: `${i * 100}ms` }}
-              >
-                <video
-                  autoPlay muted loop playsInline
-                  className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
-                >
-                  <source src={v.src} type="video/mp4" />
-                </video>
-                <div className="absolute inset-0 bg-gradient-to-t from-ink/60 to-transparent" />
-                <div className="absolute bottom-4 left-6 text-white/40 text-xs uppercase tracking-widest">{v.label}</div>
-              </div>
-            ))}
+    {/* ── GALLERY ── */}
+<section className="py-32 bg-[#080808]">
+  <div className="max-w-7xl mx-auto px-8 lg:px-12">
+
+    <div className="mb-20 fade-up">
+      <p className="text-white/25 text-xs font-semibold uppercase tracking-[0.25em] mb-4">
+        Galerie
+      </p>
+
+      <h2 className="text-5xl lg:text-7xl font-black text-white tracking-tight">
+        DRONY V AKCI
+      </h2>
+    </div>
+
+    <div className="grid md:grid-cols-2 gap-2">
+      {[
+        {
+  src: '/images/wash1.jpg',
+  label: 'Mytí fasády',
+  fit: 'contain',
+  position: '50% 50%',
+},
+        { src: '/images/wash2.jpg', label: 'Čištění dlažby' },
+      ].map((img, i) => (
+        <div
+          key={i}
+          className="fade-up relative aspect-video bg-[#111] border border-white/5 overflow-hidden group"
+          style={{ transitionDelay: `${i * 100}ms` }}
+        >
+          <img
+            src={img.src}
+            alt={img.label}
+            className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+          />
+
+          <div className="absolute inset-0 bg-gradient-to-t from-ink/60 to-transparent" />
+
+          <div className="absolute bottom-4 left-6 text-white/40 text-xs uppercase tracking-widest">
+            {img.label}
           </div>
         </div>
-      </section>
+      ))}
+    </div>
+
+  </div>
+</section>
 
       {/* ── ŠKOLENÍ PREVIEW ── */}
       <section className="py-20 bg-ink border-y border-white/8">
@@ -199,7 +215,7 @@ export default function Home() {
             <div className="bg-ink p-10 lg:p-16">
               <div className="space-y-0">
                 {[
-                  ['Doprava v ceně', 'Vyjíždíme po celé České republice'],
+                  ['Doprava v ceně', 'Doprava je v ceně v rámci Pardubického kraje a Prahy. Výjezdy do ostatních krajů jsou možné po předchozí domluvě.'],
                   ['Ekologické prostředky', 'Šetrné k fasádám i životnímu prostředí'],
                   ['Fotodokumentace', 'Před a po mytí — plná dokumentace'],
                   ['Nabídka okamžitě', 'PDF nabídka ihned po odeslání dotazníku'],
