@@ -22,15 +22,13 @@ const EXPERIENCE_LEVELS = [
 
 type FormState = {
   name: string; company: string; email: string; phone: string;
-  training_type: string; participant_count: string;
-  has_own_drone: '' | 'yes' | 'no'; drone_model: string;
+  training_type: string;
   experience: string; notes: string; gdpr_consent: boolean;
 };
 
 const initialState: FormState = {
   name: '', company: '', email: '', phone: '',
-  training_type: TRAINING_TYPES[0].value, participant_count: '',
-  has_own_drone: '', drone_model: '',
+  training_type: TRAINING_TYPES[0].value,
   experience: EXPERIENCE_LEVELS[0].value, notes: '', gdpr_consent: false,
 };
 
@@ -76,10 +74,7 @@ export default function TrainingInquiryForm({ defaultTrainingType }: { defaultTr
       const res = await fetch('/api/training-inquiries', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          ...form,
-          has_own_drone: form.has_own_drone === '' ? null : form.has_own_drone === 'yes',
-        }),
+        body: JSON.stringify(form),
       });
       if (!res.ok) {
         const d = await res.json().catch(() => ({}));
@@ -143,33 +138,12 @@ export default function TrainingInquiryForm({ defaultTrainingType }: { defaultTr
           <input type="tel" className={inputClass} value={form.phone} onFocus={markStarted}
             onChange={e => set('phone')(e.target.value)} placeholder="+420 777 123 456" />
         </div>
-        <div>
+        <div className="md:col-span-2">
           <label className="block text-xs font-semibold text-white/40 uppercase tracking-widest mb-2">Typ školení</label>
           <select className={selectClass} value={form.training_type} onFocus={markStarted}
             onChange={e => set('training_type')(e.target.value)}>
             {TRAINING_TYPES.map(t => <option key={t.value} value={t.value} className="bg-ink">{t.label}</option>)}
           </select>
-        </div>
-        <div>
-          <label className="block text-xs font-semibold text-white/40 uppercase tracking-widest mb-2">
-            Kolik osob se bude školení účastnit?
-          </label>
-          <input className={inputClass} value={form.participant_count} onFocus={markStarted}
-            onChange={e => set('participant_count')(e.target.value)} placeholder="1" />
-        </div>
-        <div>
-          <label className="block text-xs font-semibold text-white/40 uppercase tracking-widest mb-2">Máte vlastní dron?</label>
-          <select className={selectClass} value={form.has_own_drone} onFocus={markStarted}
-            onChange={e => set('has_own_drone')(e.target.value)}>
-            <option value="" className="bg-ink">Nevyplněno</option>
-            <option value="yes" className="bg-ink">Ano</option>
-            <option value="no" className="bg-ink">Ne</option>
-          </select>
-        </div>
-        <div>
-          <label className="block text-xs font-semibold text-white/40 uppercase tracking-widest mb-2">Jaký dron používáte?</label>
-          <input className={inputClass} value={form.drone_model} onFocus={markStarted}
-            onChange={e => set('drone_model')(e.target.value)} placeholder="DJI Mavic 3..." />
         </div>
         <div className="md:col-span-2">
           <label className="block text-xs font-semibold text-white/40 uppercase tracking-widest mb-2">Vaše zkušenosti</label>
