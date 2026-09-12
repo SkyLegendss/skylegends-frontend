@@ -196,7 +196,7 @@ export default function SkoleniPage() {
               <div key={item.title}
                 className="fade-up bg-ink p-8 lg:p-10 hover:bg-white/3 transition-colors duration-300"
                 style={{ transitionDelay: `${i * 60}ms` }}>
-                <item.icon className="text-white/50 mb-6" size={28} strokeWidth={1.5} />
+                <item.icon className="text-accent mb-6" size={28} strokeWidth={1.5} />
                 <h3 className="font-bold text-white text-base mb-3 leading-snug">{item.title}</h3>
                 <p className="text-sm text-white/38 leading-relaxed">{item.desc}</p>
               </div>
@@ -277,7 +277,7 @@ export default function SkoleniPage() {
               <div key={item.title}
                 className="fade-up bg-ink p-8 lg:p-10 hover:bg-white/3 transition-colors duration-300"
                 style={{ transitionDelay: `${i * 80}ms` }}>
-                <item.icon className="text-white/50 mb-6" size={28} strokeWidth={1.5} />
+                <item.icon className="text-accent mb-6" size={28} strokeWidth={1.5} />
                 <h3 className="font-bold text-white text-base mb-3 leading-snug">{item.title}</h3>
                 <p className="text-sm text-white/38 leading-relaxed">{item.desc}</p>
               </div>
