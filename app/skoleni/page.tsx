@@ -3,10 +3,11 @@ import { useEffect } from 'react';
 import Link from 'next/link';
 import {
   Gamepad2, ShieldCheck, Route, Scale, Radar, CheckCircle2,
-  PlaneTakeoff, Users, Building2, Award, MessageCircle,
+  PlaneTakeoff, Users, Building2, Award, MessageCircle, Check,
 } from 'lucide-react';
 import SiteNav from '../../components/SiteNav';
 import SiteFooter from '../../components/SiteFooter';
+import CornerFrame from '../../components/CornerFrame';
 import TrainingInquiryForm from '../../components/TrainingInquiryForm';
 import { trainings } from '../../lib/trainings';
 import { track } from '../../lib/analytics';
@@ -84,6 +85,7 @@ export default function SkoleniPage() {
           />
         </div>
         <div className="absolute inset-0 bg-gradient-to-b from-ink/20 via-transparent to-ink" />
+        <CornerFrame inset={24} className="border-accent/40" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-8 lg:px-12 pb-20 lg:pb-28 pt-32">
           <p className="text-white/40 text-xs font-medium uppercase tracking-[0.3em] mb-6">
@@ -135,7 +137,7 @@ export default function SkoleniPage() {
                   'základní orientace v legislativě', 'praktické létání s instruktorem',
                 ].map(item => (
                   <li key={item} className="flex gap-2 items-start">
-                    <span className="w-1 h-1 rounded-full bg-white/30 mt-2 shrink-0" />
+                    <Check className="text-accent shrink-0 mt-0.5" size={14} strokeWidth={2.5} />
                     {item}
                   </li>
                 ))}
@@ -164,7 +166,7 @@ export default function SkoleniPage() {
                   'praktický výcvik zaměstnanců', 'konzultace konkrétního využití dronu ve firmě',
                 ].map(item => (
                   <li key={item} className="flex gap-2 items-start">
-                    <span className="w-1 h-1 rounded-full bg-white/30 mt-2 shrink-0" />
+                    <Check className="text-accent shrink-0 mt-0.5" size={14} strokeWidth={2.5} />
                     {item}
                   </li>
                 ))}

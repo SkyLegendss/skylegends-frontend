@@ -1,8 +1,10 @@
 'use client';
 import { useEffect } from 'react';
 import Link from 'next/link';
+import { Check } from 'lucide-react';
 import SiteNav from '../components/SiteNav';
 import SiteFooter from '../components/SiteFooter';
+import CornerFrame from '../components/CornerFrame';
 
 function useFadeUp() {
   useEffect(() => {
@@ -53,6 +55,7 @@ export default function Home() {
         {/* Overlays */}
         <div className="absolute inset-0 bg-gradient-to-b from-ink/40 via-transparent to-ink" />
         <div className="absolute inset-0 bg-gradient-to-r from-ink/60 via-ink/20 to-transparent" />
+        <CornerFrame inset={24} className="border-accent/40" />
 
         {/* Content — positioned at bottom left like SpaceX */}
         <div className="absolute bottom-0 left-0 right-0 z-10 max-w-7xl mx-auto px-8 lg:px-12 pb-20 lg:pb-28">
@@ -222,9 +225,7 @@ export default function Home() {
                   ['Záruka kvality', 'Opakujeme bezplatně, pokud nejste spokojeni'],
                 ].map(([title, desc], i) => (
                   <div key={i} className="flex gap-4 items-start py-5 border-b border-white/6 last:border-0">
-                    <div className="w-px h-full mt-1.5 shrink-0">
-                      <div className="w-1 h-1 rounded-full bg-white/40" />
-                    </div>
+                    <Check className="text-accent shrink-0 mt-0.5" size={16} strokeWidth={2.5} />
                     <div>
                       <div className="text-white text-sm font-semibold mb-0.5">{title}</div>
                       <div className="text-white/35 text-sm">{desc}</div>

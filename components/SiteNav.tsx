@@ -26,7 +26,7 @@ export default function SiteNav() {
         ))}
         <Link
           href="/skoleni"
-          className={`hover:text-white transition-colors duration-200 ${pathname === '/skoleni' ? 'text-white' : ''}`}
+          className={`hover:text-white transition-colors duration-200 ${pathname === '/skoleni' ? 'text-accent' : ''}`}
         >
           Školení
         </Link>
