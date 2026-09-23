@@ -23,7 +23,7 @@ export default function Home() {
 
   const steps = [
     { n: '01', title: 'Objednávka online', desc: 'Vyplňte formulář — jméno, adresa, plocha. Okamžitě získáte číslo zakázky a cenovou nabídku.' },
-    { n: '02', title: 'Plánování trasy', desc: 'Na základě adresy a plochy naplánujeme optimální leteckou trasu dronů.' },
+    { n: '02', title: 'Kalkulace ceny mytí', desc: 'Na základě plochy objektu vypočítáme cenu mytí a připravíme cenovou nabídku.' },
     { n: '03', title: 'Mytí fasády', desc: 'Drony s tlakovým systémem a profesionálními čisticími prostředky provádí mytí s vysokou přesností.' },
     { n: '04', title: 'Předání protokolu', desc: 'Po dokončení obdržíte fotodokumentaci a protokol o provedené práci.' },
   ];
