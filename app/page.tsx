@@ -24,7 +24,7 @@ export default function Home() {
   const steps = [
     { n: '01', title: 'Objednávka online', desc: 'Vyplňte formulář — jméno, adresa, plocha. Okamžitě získáte číslo zakázky a cenovou nabídku.' },
     { n: '02', title: 'Plánování trasy', desc: 'Na základě adresy a plochy naplánujeme optimální leteckou trasu dronů.' },
-    { n: '03', title: 'Mytí fasády', desc: 'Drony s tlakovým systémem a ekologickými prostředky provádí mytí s vysokou přesností.' },
+    { n: '03', title: 'Mytí fasády', desc: 'Drony s tlakovým systémem a profesionálními čisticími prostředky provádí mytí s vysokou přesností.' },
     { n: '04', title: 'Předání protokolu', desc: 'Po dokončení obdržíte fotodokumentaci a protokol o provedené práci.' },
   ];
 
@@ -87,9 +87,9 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-8 lg:px-12">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              ['65 m', 'Max. výška budovy'],
+              ['60 m', 'Max. výška budovy'],
               ['48 h', 'od objednávky k mytí'],
-              ['100%', 'ekologické prostředky'],
+              ['100%', 'profesionální čisticí prostředky'],
               ['Bez lešení', 'žádná stavební technika'],
             ].map(([val, label]) => (
               <div key={label} className="border-l border-white/10 pl-6">
@@ -220,7 +220,7 @@ export default function Home() {
               <div className="space-y-0">
                 {[
                   ['Doprava v ceně', 'Doprava je v ceně v rámci Pardubického kraje a Prahy. Výjezdy do ostatních krajů jsou možné po předchozí domluvě.'],
-                  ['Ekologické prostředky', 'Šetrné k fasádám i životnímu prostředí'],
+                  ['Profesionální čisticí prostředky', 'Šetrné k fasádám i životnímu prostředí'],
                   ['Fotodokumentace', 'Před a po mytí — plná dokumentace'],
                   ['Nabídka okamžitě', 'PDF nabídka ihned po odeslání dotazníku'],
                   ['Záruka kvality', 'Opakujeme bezplatně, pokud nejste spokojeni'],

@@ -40,6 +40,9 @@ export default function SiteFooter() {
             <a href="/#faq" className="hover:text-white/60 transition-colors">FAQ</a>
           </div>
         </div>
+        <p className="pt-6 text-xs text-white/35 leading-relaxed">
+          Společnost s ručením omezeným SENTEMOV GROUP s.r.o., založena 20.3.2025, zapsána pod značkou C 54459/KSHK Krajským soudem v Hradci Králové.
+        </p>
         <div className="pt-4 text-center">
           <span className="text-[10px] text-white select-none">created by pashaslesar</span>
         </div>
