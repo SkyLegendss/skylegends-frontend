@@ -1,8 +1,9 @@
 import Link from 'next/link';
+import { Facebook, Instagram, Linkedin } from 'lucide-react';
 
 export default function SiteFooter() {
   return (
-    <footer className="bg-ink border-t border-white/10 py-20">
+    <footer id="contact" className="bg-ink border-t border-white/10 py-20">
       <div className="max-w-7xl mx-auto px-8 lg:px-12">
         <div className="grid md:grid-cols-3 gap-12 mb-16">
           <div>
@@ -10,6 +11,37 @@ export default function SiteFooter() {
             <div className="text-white/35 text-sm leading-relaxed max-w-xs">
               Profesionální mytí fasád a oken výškových budov pomocí autonomních dronů. Bez lešení, za pevnou cenu.
             </div>
+            <div className="flex items-center gap-3 mt-6">
+  <a
+    href="https://www.facebook.com/profile.php?id=61592000136003&locale=ru_RU"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Facebook"
+    className="w-10 h-10 border border-white/15 flex items-center justify-center text-white/40 hover:bg-white hover:text-ink hover:border-white transition-all duration-200"
+  >
+    <Facebook size={17} strokeWidth={1.7} />
+  </a>
+
+  <a
+    href="https://www.instagram.com/skylegends_eu/"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Instagram"
+    className="w-10 h-10 border border-white/15 flex items-center justify-center text-white/40 hover:bg-white hover:text-ink hover:border-white transition-all duration-200"
+  >
+    <Instagram size={17} strokeWidth={1.7} />
+  </a>
+
+  <a
+    href="https://www.linkedin.com/company/sky-legends-eu/?viewAsMember=true"
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="LinkedIn"
+    className="w-10 h-10 border border-white/15 flex items-center justify-center text-white/40 hover:bg-white hover:text-ink hover:border-white transition-all duration-200"
+  >
+    <Linkedin size={17} strokeWidth={1.7} />
+  </a>
+</div>
           </div>
           <div>
             <div className="text-white/25 text-xs uppercase tracking-[0.2em] mb-5">Kontakt</div>

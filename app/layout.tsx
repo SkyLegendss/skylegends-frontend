@@ -3,7 +3,7 @@ import './globals.css';
 
 export const metadata: Metadata = {
   title: 'Sky Legends – Mytí fasád drony',
-  description: 'Profesionální čištění fasád a oken výškových budov pomocí autonomních dronů. 39 Kč/m². Česká republika.',
+  description: 'Profesionální čištění fasád a oken výškových budov pomocí autonomních dronů. Česká republika.',
   keywords: ['mytí fasád', 'čištění oken', 'drony', 'fasády', 'výškové budovy', 'Pardubice'],
   icons: {
     icon: '/drone-svgrepo-com.svg',

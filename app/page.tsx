@@ -156,7 +156,7 @@ export default function Home() {
           <img
             src={img.src}
             alt={img.label}
-            className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-500"
+           className="absolute inset-0 w-full h-full object-cover"
           />
 
           <div className="absolute inset-0 bg-gradient-to-t from-ink/60 to-transparent" />

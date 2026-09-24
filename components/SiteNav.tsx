@@ -6,6 +6,7 @@ const SECTION_LINKS = [
   { label: 'Jak to funguje', hash: 'how' },
   { label: 'Nabídka', hash: 'pricing' },
   { label: 'FAQ', hash: 'faq' },
+  { label: 'Kontakt', hash: 'contact' },
 ];
 
 export default function SiteNav() {
